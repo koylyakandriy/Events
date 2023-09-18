@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { HeaderBackButton } from "@react-navigation/elements";
 
 const EventDetailScreen = () => {
   const { params } = useRoute();
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "new title",
+      headerLeft: () => (
+        <HeaderBackButton
+          tintColor="white"
+          onPress={() => navigation.goBack()}
+        />
+      ),
+    });
+  }, []);
 
   return (
     <View style={styles.screen}>
